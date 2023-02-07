@@ -1,0 +1,5 @@
+---
+- import_tasks: os.yml
+- import_tasks: jdk.yml
+- import_tasks: python.yml
+- import_tasks: greengrassv2.yml

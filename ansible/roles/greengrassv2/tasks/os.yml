@@ -1,0 +1,5 @@
+---
+- name: Prepare workdir
+  file:
+    path: "{{work_dir}}"
+    state: directory

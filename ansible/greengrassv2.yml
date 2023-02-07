@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    work_dir: /tmp/work
+    greengrass:
+      version: 2.9.3
+  roles: 
+    - role: greengrassv2
+    - role: greengrass-settings
+    - role: greengrass-service

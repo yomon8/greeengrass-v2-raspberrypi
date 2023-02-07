@@ -1,0 +1,6 @@
+---
+- name: Update repositories cache and install "openjdk-11-jre" package
+  become: true
+  apt:
+    name: python3-pip
+    update_cache: yes

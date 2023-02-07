@@ -1,0 +1,13 @@
+---
+- name: Setup greengrass service
+  become: true
+  shell: >
+    java -Droot="/greengrass/v2" \
+    -Dlog.store=FILE \
+    -jar /opt/greengrass/lib/Greengrass.jar \
+    --deploy-dev-tools true \
+    --aws-region {{aws_region}} \
+    --provision false \
+    --component-default-user ggc_user:ggc_group \
+    --init-config /greengrass/config/config.yaml \
+    --setup-system-service true

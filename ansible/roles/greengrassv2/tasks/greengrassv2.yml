@@ -1,0 +1,26 @@
+---
+- name: Prepare install dir for Greengrass
+  become: true
+  file:
+    path: /opt/greengrass
+    state: directory
+
+- name: Download greengrass nucleus
+  get_url:
+    url: https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-{{greengrass.version}}.zip
+    dest: "{{work_dir}}/greengrass.zip"
+    mode: u=rwx
+
+- name: Extract grenngrass
+  become: true
+  unarchive:
+    src: "{{work_dir}}/greengrass.zip"
+    dest: /opt/greengrass
+    remote_src: yes
+
+- name: Remove old setting file 
+  file:
+    path: "{{work_dir}}/greengrass.zip"
+    state: absent
+
+
