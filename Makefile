@@ -5,11 +5,11 @@ DEVICE_NAME := my-ggv2-device
 AWS_PROFILE ?= default
 AWS_REGION ?= ap-northeast-1
 GREENGRASS_VERSION := 2.9.3
-S3_BUCKET :=
-DEVICE_IP :=
 COMPONENT_NAME := com.example.greengrassv2
 COMPONENT_VERSION := 1.0.0
 TARGET_IOT_TOPIC := $(COMPONENT_NAME)/topic
+S3_BUCKET :=
+DEVICE_IP :=
 
 #############################################
 # Constants
