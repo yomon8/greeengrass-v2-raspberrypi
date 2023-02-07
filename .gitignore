@@ -8,5 +8,4 @@ __pycache__/
 *.tfstate
 *.tfstate.*
 
-venv/
-.venv/
+greeengrass-config/
