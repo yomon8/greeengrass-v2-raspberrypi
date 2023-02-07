@@ -1,5 +1,9 @@
 # Greengrass V2 to Raspberry Pi 
 
+Please refer to the Japanese blog for more details.
+
+[Blog Link](https://yomon.hatenablog.com/entry/2022/02/greengrassv2_terraform_ansible)
+
 Definitions for deploying Greengrass v2 to Raspberry Pi using Terraform and Ansible.
 
 ![](./image.png)
