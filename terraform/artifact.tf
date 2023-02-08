@@ -2,11 +2,13 @@ resource "aws_s3_object" "requirements_txt" {
   bucket = local.artifact_bucket
   key    = "${local.artifact_s3_key_prefix}/requirements.txt"
   source = "${local.artifact_dir}/requirements.txt"
+  etag   = filemd5("${local.artifact_dir}/requirements.txt")
 }
 resource "aws_s3_object" "main" {
   bucket = local.artifact_bucket
   key    = "${local.artifact_s3_key_prefix}/main.py"
   source = "${local.artifact_dir}/main.py"
+  etag   = filemd5("${local.artifact_dir}/main.py")
 }
 
 resource "local_file" "component" {
