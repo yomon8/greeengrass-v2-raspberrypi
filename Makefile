@@ -96,6 +96,13 @@ greengrass-component:
 		create-component-version \
 		--inline-recipe fileb://./$(CONFIG_DIR)/component/$(COMPONENT_NAME)_$(COMPONENT_VERSION).json
 
+.PHONY: greengrass-component-delete
+greengrass-component-delete:
+	$(eval account_id := `aws sts get-caller-identity --profile $(AWS_PROFILE) --query 'Account' --output text`)
+	aws greengrassv2 --profile $(AWS_PROFILE) --region $(AWS_REGION) \
+		delete-component \
+		--arn arn:aws:greengrass:$(AWS_REGION):$(account_id):components:$(COMPONENT_NAME):versions:$(COMPONENT_VERSION)
+
 .PHONY: greengrass-deploy
 greengrass-deploy:
 	$(eval account_id := `aws sts get-caller-identity --profile $(AWS_PROFILE) --query 'Account' --output text`)
