@@ -1,6 +1,8 @@
 locals {
   device_name            = var.device_name
   output_dir             = "${path.cwd}/${var.config_dir}"
+  output_component_dir   = "${local.output_dir}/component"
+  output_recipe_dir      = "${local.output_component_dir}/recipe"
   artifact_bucket        = var.bucket
   prefix                 = "${var.artifacts_dir}/${var.component_name}/${var.component_version}"
   artifact_dir           = "${path.cwd}/${local.prefix}"

@@ -90,11 +90,14 @@ endif
 # Greengrass
 #############################################
 
+COMPONENT_DIR := $(CONFIG_DIR)/component
+RECIPE_DIR := $(COMPONENT_DIR)/recipe
+
 .PHONY: greengrass-component
 greengrass-component:
 	aws greengrassv2 --profile $(AWS_PROFILE) --region $(AWS_REGION) \
 		create-component-version \
-		--inline-recipe fileb://./$(CONFIG_DIR)/component/$(COMPONENT_NAME)_$(COMPONENT_VERSION).yaml
+		--inline-recipe fileb://./$(RECIPE_DIR)/$(COMPONENT_NAME)_$(COMPONENT_VERSION).yaml
 
 .PHONY: greengrass-component-delete
 greengrass-component-delete:
@@ -103,17 +106,10 @@ greengrass-component-delete:
 		delete-component \
 		--arn arn:aws:greengrass:$(AWS_REGION):$(account_id):components:$(COMPONENT_NAME):versions:$(COMPONENT_VERSION)
 
-define COMPONENT_DEF
-{ \
-	"$(COMPONENT_NAME)" : { \
-		"componentVersion": "$(COMPONENT_VERSION)" \
-	} \
-}
-endef
 .PHONY: greengrass-deploy
 greengrass-deploy:
 	$(eval account_id := `aws sts get-caller-identity --profile $(AWS_PROFILE) --query 'Account' --output text`)
 	aws greengrassv2 --profile $(AWS_PROFILE) --region $(AWS_REGION) \
 	create-deployment \
 	--target-arn "arn:aws:iot:$(AWS_REGION):$(account_id):thing/$(DEVICE_NAME)" \
-	--components '${COMPONENT_DEF}'
+	--components file://./${COMPONENT_DIR}/$(COMPONENT_NAME).json
