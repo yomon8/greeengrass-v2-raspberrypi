@@ -57,6 +57,12 @@ resource "local_file" "component" {
 {
   "${var.component_name}": {
     "componentVersion": "${var.component_version}"
+  },
+  "aws.greengrass.Cli": {
+    "componentVersion": "2.9.1"
+  },
+  "aws.greengrass.LocalDebugConsole": {
+    "componentVersion": "2.2.7"
   }
 }
 EOF
